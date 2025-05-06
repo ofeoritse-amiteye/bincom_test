@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-gn(b4r8s3wcikq&ic!a354h_vo1hjze6gg=(^x1(juc7@kic&#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['AMO.pythonanywhere.com']
 
 
 # Application definition
@@ -76,10 +76,10 @@ WSGI_APPLICATION = 'bincom_test.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'bincom_test',
-        'USER' : 'root',	
-        'PASSWORD' : '',
-        'HOST' : 'localhost',
+        'NAME':'AMO$bincom_test',
+        'USER' : 'AMO',	
+        'PASSWORD' : 'mysqlpass1234',
+        'HOST' : 'AMO.mysql.pythonanywhere-services.com',
         'PORT' : '3306',
         'OPTIONS': {
             'init_command':"SET sql_mode='STRICT_TRANS_TABLES'"
