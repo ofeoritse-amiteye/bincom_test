@@ -9,9 +9,9 @@ from django.db.models import Sum
 def p1(request):
     records1 = PollingUnit.objects.all()
     if records1.exists():
-        return render(request, 'p1.html', {'records1': records1})
+        return render(request, 'templates/p1.html', {'records1': records1})
     else:
-        return render(request, 'p1.html', {'error': 'No record found'})
+        return render(request, 'templates/p1.html', {'error': 'No record found'})
     
 def results(request):
     if request.method == 'POST':
@@ -19,9 +19,9 @@ def results(request):
         records1 = PollingUnit.objects.all()
         records = AnnouncedPuResults.objects.filter(polling_unit_uniqueid=id)
         if records.exists():
-            return render(request, 'p1.html', {'records': records, 'records1':records1, 'id':id})
+            return render(request, 'templates/p1.html', {'records': records, 'records1':records1, 'id':id})
         else:
-            return render(request, 'p1.html', {'error': 'No record found', 'records1':records1})
+            return render(request, 'templates/p1.html', {'error': 'No record found', 'records1':records1})
         
 def get_client_ip(request):
     """Get client IP address from request headers."""
@@ -46,7 +46,7 @@ def submit_result(request):
     else:
         records1 = PollingUnit.objects.all()
         party= Party.objects.all()
-    return render(request, 'p3.html', {'records1': records1, 'party': party})
+    return render(request, 'templates/p3.html', {'records1': records1, 'party': party})
 
 
 
@@ -58,8 +58,8 @@ def page2(request):
         results = (AnnouncedPuResults.objects.filter(polling_unit_uniqueid__in=units).values('party_abbreviation').annotate(total_score=Sum('party_score')))
         print(units)
         if results.exists():
-            return render(request, 'p2.html', {'result': results, 'records': records,'id':id})
+            return render(request, 'templates/p2.html', {'result': results, 'records': records,'id':id})
         else:
-            return render(request, 'p2.html', {'error': 'No record found', 'records': records})
+            return render(request, 'templates/p2.html', {'error': 'No record found', 'records': records})
     records=Lga.objects.all()
-    return render(request, 'p2.html',{'records': records})
+    return render(request, 'templates/p2.html',{'records': records})
