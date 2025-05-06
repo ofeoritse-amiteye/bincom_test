@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Submit Result</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md mb-6">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-blue-600">INEC Result Portal</h1>
+            <div class="space-x-4">
+                <a href="/" class="text-gray-700 hover:text-blue-500">Home</a>
+                <a href="/page2" class="text-gray-700 hover:text-blue-500">LGA Summary</a>
+                <a href="/submit_result" class="text-blue-700 font-semibold">Submit Result</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Submit Form -->
+    <div class="max-w-2xl mx-auto bg-white p-8 rounded shadow-md">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6">Submit New Result</h2>
+        <form method="POST" action="/submit_result" class="space-y-5">
+            {% csrf_token %}
+            
+            <div>
+                <label for="polling_unit_id" class="block text-gray-700 font-medium mb-1">Polling Unit ID:</label>
+                <select name="polling_unit_id" id="polling_unit_id" required class="w-full border border-gray-300 p-2 rounded-md">
+                    <option value="">Select Polling Unit</option>
+                    {% for i in records1 %}
+                        <option value="{{ i.uniqueid }}">{{ i.uniqueid }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label for="party_abbreviation" class="block text-gray-700 font-medium mb-1">Party Abbreviation:</label>
+                <select name="party_abbreviation" id="party_abbreviation" required class="w-full border border-gray-300 p-2 rounded-md">
+                    <option value="">Select Party</option>
+                    {% for i in party %}
+                        <option value="{{ i.partyid }}">{{ i.partyid }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label for="party_score" class="block text-gray-700 font-medium mb-1">Party Score:</label>
+                <input type="number" id="party_score" name="party_score" required class="w-full border border-gray-300 p-2 rounded-md">
+            </div>
+
+            <div>
+                <label for="entered_by" class="block text-gray-700 font-medium mb-1">Entered by:</label>
+                <input type="text" id="entered_by" name="entered_by" required class="w-full border border-gray-300 p-2 rounded-md">
+            </div>
+
+            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+                Submit
+            </button>
+        </form>
+    </div>
+
+</body>
+</html>

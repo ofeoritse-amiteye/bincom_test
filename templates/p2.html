@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LGA Results Summary</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen font-sans">
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md mb-6">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <h1 class="text-xl font-bold text-green-600">INEC Result Portal</h1>
+      <div class="space-x-4">
+        <a href="/" class="text-gray-700 hover:text-green-500">Home</a>
+        <a href="/page2" class="text-gray-700 hover:text-green-500">LGA Summary</a>
+        <a href="/submit-result" class="text-gray-700 hover:text-green-500">Submit Result</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <form action="/page2" method="POST" class="space-y-5">
+      {% csrf_token %}
+      <div>
+        <label for="polling_unit_id" class="block text-gray-700 font-medium mb-1">Local Government Area:</label>
+        <select name="polling_unit_id" id="polling_unit_id" required class="w-full border h-30 border-gray-300 p-2 rounded-md">
+          <option value="">Select LGA</option>
+          {% for i in records %}
+            <option value="{{ i.lga_id }}">{{ i.lga_name }} : {{ i.lga_id }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+        Submit
+      </button>
+
+      {% if result %}
+        <div class="mt-6">
+          <h3 class="text-xl font-semibold text-gray-800 mb-3">Total Results for Selected LGA: {{ id }}</h3>
+          <ul class="list-disc list-inside text-gray-700">
+            {% for res in result %}
+              <li>{{ res.party_abbreviation }}: {{ res.total_score }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% elif error %}
+        <div class="mt-6 text-red-600 text-lg">{{ error }}</div>
+      {% endif %}
+    </form>
+  </div>
+</body>
+</html>
