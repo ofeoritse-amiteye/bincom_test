@@ -78,7 +78,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':'bincom_db',
         'USER' : 'AMO',	
-        'PASSWORD' : '',
+        'PASSWORD' : 'bincom_db1234',
         'HOST' : 'AMO.mysql.pythonanywhere-services.com',
         'PORT' : '3306',
         'OPTIONS': {
