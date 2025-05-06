@@ -76,9 +76,9 @@ WSGI_APPLICATION = 'bincom_test.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'AMO$bincom_db',
+        'NAME':'bincom_db',
         'USER' : 'AMO',	
-        'PASSWORD' : 'bincom_db1234',
+        'PASSWORD' : '',
         'HOST' : 'AMO.mysql.pythonanywhere-services.com',
         'PORT' : '3306',
         'OPTIONS': {
